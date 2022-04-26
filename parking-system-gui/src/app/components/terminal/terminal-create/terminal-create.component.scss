@@ -1,0 +1,55 @@
+.terminal-configuration-step {
+
+  .terminal-configuration-form-fields {
+    display: flex;
+    flex-direction: column;
+  }
+
+}
+
+::ng-deep .mat-vertical-content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.parking-places-step {
+  margin-top: 20px;
+  display: flex;
+  gap: 50px;
+
+  .parking-places-form-fields {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .parking-places-header {
+    color: rgba(0, 0, 0, 0.87);
+  }
+
+
+  .parking-places-table {
+    font-size: 14px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+
+
+
+    table {
+      width: 300px;
+      margin-bottom: 0;
+    }
+  }
+
+  .control-buttons {
+    margin: 20px;
+    display: flex;
+    gap: 30px;
+  }
+}
+
+.final-step {
+  .control-buttons {
+    display: flex;
+    gap: 20px;
+  }
+}

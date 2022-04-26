@@ -1,0 +1,23 @@
+.canvas {
+  border: 1px solid green;
+}
+
+.canvas-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.canvas-wrapper .actions {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 200px;
+}
+
+.add-label-form {
+  direction: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+}

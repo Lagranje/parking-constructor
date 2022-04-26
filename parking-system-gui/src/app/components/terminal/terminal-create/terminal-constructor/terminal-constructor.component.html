@@ -1,0 +1,28 @@
+<div class="canvas-wrapper">
+  <div class="actions">
+    <button mat-stroked-button (click)="addParkingPlace()">Add Parking Place</button>
+    <button mat-stroked-button (click)="removeSelectedParkingPlace()">Remove Parking Place</button>
+    <div class="add-label-form" *ngIf="canvas._activeObject">
+      <form [formGroup]="parkingPlaceLabelFormGroup">
+        <mat-form-field appearance="fill"
+          *ngFor="let control of parkingPlaceLabelFormGroup.parkingPlaceConfigurationControls">
+            <mat-label>{{ control.label }}</mat-label>
+            <input matInput placeholder="{{control.label}}"
+                            formControlName="{{control.modelProperty}}">
+         </mat-form-field>
+      </form>
+      <button
+              [disabled]="!parkingPlaceLabelFormGroup.valid"
+              mat-stroked-button
+              (click)="addOrUpdateLabel()">
+              {{ canvas._activeObject?._objects[1] ? "Update Label" : "Add Label" }}
+      </button>
+    </div>
+    <button
+        mat-stroked-button
+        (click)="logCanvas()">
+        log canvas
+    </button>
+  </div>
+  <canvas class="canvas" id="canvas"></canvas>
+</div>

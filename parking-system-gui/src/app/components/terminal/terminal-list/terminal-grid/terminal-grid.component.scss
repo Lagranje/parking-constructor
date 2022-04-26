@@ -1,0 +1,23 @@
+.spinner-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+:host ::ng-deep .mat-spinner.mat-progress-spinner.mat-primary {
+  height: 40px !important;
+  width: 40px !important;
+
+   svg {
+    height: 40px !important;
+    width: 40px !important;
+  }
+}
+
+mat-table, mat-paginator {
+  width: 100%;
+  max-width: 1110px;
+  margin: 0 auto;
+  padding: 0px 20px 0px 20px;
+}

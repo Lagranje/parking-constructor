@@ -1,0 +1,40 @@
+<div class="spinner-container" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<mat-table [dataSource]="dataSource" *ngIf="!loading">
+
+  <ng-container matColumnDef="_id">
+    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+    <mat-cell *matCellDef="let terminal">{{terminal._id}}</mat-cell >
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+    <mat-cell *matCellDef="let terminal">{{terminal.name}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="deleteAction">
+    <mat-header-cell *matHeaderCellDef>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let terminal">
+      <span (click)="deleteTerminal(terminal)">
+        <fa-icon [icon]="trashIcon"></fa-icon>
+      </span>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+  <mat-row *matRowDef="let row; columns: displayedColumns" [routerLink]="row._id"></mat-row>
+
+</mat-table>
+
+<mat-paginator   *ngIf="!loading"
+                 [length]="dataSource.data.length"
+                 [pageIndex]="0"
+                 [pageSize]="1"
+                 [pageSizeOptions]="[1, 5, 10]">
+</mat-paginator>
+
+

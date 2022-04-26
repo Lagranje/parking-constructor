@@ -1,0 +1,56 @@
+
+<!-- <terminal-constructor></terminal-constructor> -->
+
+<mat-vertical-stepper [linear]="false" #stepper>
+
+  <mat-step [stepControl]="terminalConfigurationForm" [editable]="false">
+    <ng-template matStepLabel>Fill out terminal configuration</ng-template>
+
+    <div *ngIf="0 === stepper.selectedIndex" class="terminal-configuration-step">
+
+      <form [formGroup]="terminalConfigurationForm">
+        <div class="terminal-configuration-form-fields">
+          <mat-form-field appearance="fill"
+          *ngFor="let control of terminalConfigurationForm.terminalSizeControls">
+            <mat-label>{{ control.label }}</mat-label>
+            <input matInput placeholder="{{control.label}}"
+                            formControlName="{{control.modelProperty}}">
+          </mat-form-field>
+        </div>
+
+        <div class="control-buttons">
+          <button mat-stroked-button
+                  [disabled]="!terminalConfigurationForm.valid"
+                  matStepperNext
+                  (click)="terminalConfigurationNextHandler()">
+                  Next
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Terminal Constructor</ng-template>
+      <div class="terminal-constructor-step" *ngIf="1 === stepper.selectedIndex">
+        <terminal-constructor [terminal]="terminal"></terminal-constructor>
+      </div>
+  </mat-step>
+
+
+  <mat-step >
+
+    <ng-template matStepLabel>Done</ng-template>
+    <div class="final-step">
+      <div class="control-buttons">
+        <button mat-stroked-button matStepperPrevious>Back</button>
+        <button mat-stroked-button (click)="stepper.reset()">Reset</button>
+        <button mat-stroked-button (click)="submit()">Submit</button>
+      </div>
+    </div>
+
+  </mat-step>
+</mat-vertical-stepper>
