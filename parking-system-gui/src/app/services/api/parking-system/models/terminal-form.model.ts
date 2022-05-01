@@ -16,8 +16,9 @@ export class TerminalConfigurationFormGroup extends FormGroup {
   constructor() {
     super({
       name: new TerminalFormControl("Name", "name", "", [Validators.required, Validators.minLength(3)]),
-      width: new TerminalFormControl("Width", "width", "", [Validators.required, Validators.pattern("^[0-9]*$")]),
-      height: new TerminalFormControl("Height", "height", "", [Validators.required, Validators.pattern("^[0-9]*$")])
+      location: new TerminalFormControl("Location", "location", "", [Validators.required, Validators.minLength(3)]),
+      width: new TerminalFormControl("Width (m)", "width", "", [Validators.required, Validators.pattern("^[0-9]*$")]),
+      height: new TerminalFormControl("Height (m)", "height", "", [Validators.required, Validators.pattern("^[0-9]*$")]),
     })
   }
 

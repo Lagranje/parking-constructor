@@ -32,6 +32,10 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from "@angular/material/dialog";
 
+import "./components/terminal/terminal-create/terminal-constructor/fabric-modules/parking-place.subclass";
+import "./components/terminal/terminal-create/terminal-constructor/fabric-modules/grid.subclass";
+import "./components/terminal/terminal-create/terminal-constructor/fabric-modules/beacon.subclass";
+
 @NgModule({
   declarations: [
     AppComponent,

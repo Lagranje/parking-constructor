@@ -1,7 +1,9 @@
 const express = require('express');
+
 const app = express();
 
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
+
 
 const mongoose = require('./database/mongoose');
 
@@ -9,7 +11,7 @@ const Terminal = require('./database/models/terminal');
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET HEAD OPTIONS POST PUT PATCH DELETE");
+    res.header("Access-Control-Allow-Methods", ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE",]);
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 })
@@ -34,8 +36,11 @@ app.post('/terminals', (req, res) => {
 });
 
 app.patch('/terminals/:id', (req, res) => {
+    console.log(JSON.stringify(req.body).length);
     Terminal.findOneAndUpdate({ _id: req.params.id }, { $set: req.body })
-            .then(res.status(204).send())
+            .then(() => { 
+                res.status(204).send(); 
+            })
             .catch(error => console.log(error));
 });
 

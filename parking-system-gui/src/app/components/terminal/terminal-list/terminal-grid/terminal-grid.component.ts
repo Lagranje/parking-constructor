@@ -22,14 +22,14 @@ export class TerminalGridComponent implements AfterViewInit{
 
 
 
-  public displayedColumns = ["_id", "name", "deleteAction"];
+  public displayedColumns = ["name", "location", "deleteAction"];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
   public trashIcon = faTrash;
 
-  constructor(private terminalsService: TerminalsService, private cdRef: ChangeDetectorRef) {
+  constructor(private terminalsService: TerminalsService) {
   }
 
   ngAfterViewInit() {
@@ -40,7 +40,9 @@ export class TerminalGridComponent implements AfterViewInit{
     });
   }
 
-  deleteTerminal(terminal: Terminal) {
+  deleteTerminal($event, terminal: Terminal) {
+    $event.stopImmediatePropagation();
+
     this.terminalsService.deleteTerminal(terminal._id).subscribe(res => {
       this.dataSource.data = this.dataSource.data.filter(t => t._id != terminal._id);
     })

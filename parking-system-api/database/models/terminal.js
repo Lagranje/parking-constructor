@@ -4,20 +4,18 @@ const terminalSchema = new mongoose.Schema({
     name: {
         type: String
     },
+    location: {
+        type: String
+    },
     width: {
         type: Number
     },
     height: { 
         type: Number
     },
-    parkingPlaces: [{
-        width: {
-            type: Number
-        },
-        height: {
-            type: Number
-        }
-    }]
+    terminalScheme: {
+        type: String
+    }
 });
 
 const Terminal = mongoose.model('Terminal', terminalSchema);

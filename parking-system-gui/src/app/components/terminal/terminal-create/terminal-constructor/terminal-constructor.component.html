@@ -1,8 +1,11 @@
 <div class="canvas-wrapper">
   <div class="actions">
-    <button mat-stroked-button (click)="addParkingPlace()">Add Parking Place</button>
-    <button mat-stroked-button (click)="removeSelectedParkingPlace()">Remove Parking Place</button>
-    <div class="add-label-form" *ngIf="canvas._activeObject">
+    <div class="action-group-add">
+      <button mat-stroked-button (click)="addParkingPlace()">Add <fa-icon [icon]="parkingIcon"></fa-icon></button>
+      <button mat-stroked-button (click)="addBeacon()"> Add <fa-icon [icon]="beaconIcon"></fa-icon></button>
+    </div>
+    <button mat-stroked-button (click)="removeActiveObject()">Remove <fa-icon [icon]="trashIcon"></fa-icon></button>
+    <div class="add-label-form" *ngIf="canvas?._activeObject">
       <form [formGroup]="parkingPlaceLabelFormGroup">
         <mat-form-field appearance="fill"
           *ngFor="let control of parkingPlaceLabelFormGroup.parkingPlaceConfigurationControls">
@@ -15,14 +18,11 @@
               [disabled]="!parkingPlaceLabelFormGroup.valid"
               mat-stroked-button
               (click)="addOrUpdateLabel()">
-              {{ canvas._activeObject?._objects[1] ? "Update Label" : "Add Label" }}
+              Update Label
+              <!-- {{ canvas?._activeObject?._objects[1] ? "Update Label" : "Add Label" }} -->
       </button>
     </div>
-    <button
-        mat-stroked-button
-        (click)="logCanvas()">
-        log canvas
-    </button>
+    <button class="action-submit" mat-stroked-button (click)="submit()">Submit</button>
   </div>
   <canvas class="canvas" id="canvas"></canvas>
 </div>

@@ -14,12 +14,20 @@ export class TerminalsService {
   constructor(private httpClient: HttpClient) {
   }
 
+  public getTerminalById(id: string): Observable<Terminal> {
+    return this.httpClient.get<Terminal>(`${this.rootUrl}/terminals/${id}`);
+  }
+
   public getTerminals(): Observable<[Terminal]> {
     return this.httpClient.get<[Terminal]>(`${this.rootUrl}/terminals`);
   }
 
   public postTerminal(terminal: Terminal): Observable<Terminal> {
     return this.httpClient.post<Terminal>(`${this.rootUrl}/terminals`, terminal);
+  }
+
+  public patchTerminal(terminal: Terminal): Observable<Terminal> {
+    return this.httpClient.patch<Terminal>(`${this.rootUrl}/terminals/${terminal._id}`, terminal);
   }
 
   public deleteTerminal(id: string) {

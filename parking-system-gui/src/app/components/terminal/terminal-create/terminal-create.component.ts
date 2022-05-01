@@ -5,6 +5,7 @@ import { Terminal } from 'src/app/services/api/parking-system/models/terminals.m
 import { TerminalsService } from 'src/app/services/api/parking-system/services/terminals.service';
 
 import { MatStepper } from '@angular/material/stepper';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'terminal-create',
@@ -20,15 +21,15 @@ export class TerminalCreateComponent{
 
   public terminalConfigurationForm: TerminalConfigurationFormGroup = new TerminalConfigurationFormGroup();
 
-  constructor(private terminalsService: TerminalsService) {
+  constructor(private terminalsService: TerminalsService,
+              private router: Router) {
   }
 
   submit() {
-    if (this.terminalConfigurationForm.valid) {
-      this.mapFormsToModel();
-      this.terminalsService.postTerminal(this.terminal)
-                           .subscribe(res => console.log(res));
-    }
+    this.terminalsService.postTerminal(this.terminal)
+                          .subscribe(() => {
+                            this.router.navigate(['./terminals'])
+                          });
   }
 
   terminalConfigurationNextHandler() {
@@ -40,6 +41,7 @@ export class TerminalCreateComponent{
 
   private mapFormsToModel() {
       this.terminal.name = this.terminalConfigurationForm.value.name;
+      this.terminal.location = this.terminalConfigurationForm.value.location;
       this.terminal.height = this.terminalConfigurationForm.value.height;
       this.terminal.width = this.terminalConfigurationForm.value.width;
   }
