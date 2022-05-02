@@ -12,9 +12,13 @@ fabric.ParkingPlace = fabric.util.createClass(fabric.Group, {
 
     const items = [];
 
-    options.width = options.width ?? defaultWidth;
-    options.height = options.height ?? defaultHeight;
-
+    const overriddenOptions = {
+      width: options.width ?? defaultWidth,
+      height: options.height ?? defaultHeight,
+      top: options.top ?? 0,
+      left: options.left ?? 0,
+      label: options.label
+    }
 
     if (options.objects && options.objects.find(obj => obj.type == 'rect')) {
       items.push(new fabric.Rect(options.objects.find(obj => obj.type == 'rect')));
@@ -29,7 +33,8 @@ fabric.ParkingPlace = fabric.util.createClass(fabric.Group, {
       }));
     }
 
-    this.callSuper('initialize', items, options);
+
+    this.callSuper('initialize', items, overriddenOptions);
 
     this.on('modified', onModified)
 
