@@ -1,8 +1,11 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import 'fabric';
 import { Terminal } from 'src/app/services/api/parking-system/models/terminals.model';
 import { ParkingPlaceConfigurationFormGroup } from 'src/app/services/api/parking-system/models/terminal-form.model';
 import { faTrash, faParking, faWifi } from '@fortawesome/free-solid-svg-icons';
+import { MatDialog } from '@angular/material/dialog';
+import { ParkingPlaceDialogComponent } from "./dialogs/parking-place-dialog.component/parking-place-dialog.component";
+import { BeaconDialogComponent } from './dialogs/beacon-dialog.component/beacon-dialog.component';
 
 declare const fabric;
 
@@ -34,7 +37,7 @@ export class TerminalConstructorComponent {
     return this._terminal;
   }
 
-  constructor() {}
+  constructor(private dialog: MatDialog) {}
 
   public readonly gridSize = 50;
   public readonly unitScale = 10;
@@ -78,53 +81,32 @@ export class TerminalConstructorComponent {
   }
 
   addParkingPlace() {
-    const parkingPlace = new fabric.ParkingPlace();
 
-    this.canvas.add(parkingPlace);
+    const dialogRef = this.dialog.open(ParkingPlaceDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      const parkingPlace = new fabric.ParkingPlace({
+        label: result.label
+      });
+
+      this.canvas.add(parkingPlace);
+    });
   }
 
-  createLabel(text: string) {
-    return new fabric.Text(text, {
-      fontSize: 30,
-      originX: 'center',
-      originY: 'center',
-      fill: '#000000'
-    });
+  addBeacon() {
+
+    const dialogRef = this.dialog.open(BeaconDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      const beacon = new fabric.Beacon(result);
+
+      this.canvas.add(beacon);
+    })
   }
 
   removeActiveObject() {
     this.canvas.remove(this.canvas.getActiveObject());
   }
-
-  addOrUpdateLabel() {
-    if (this.parkingPlaceLabelFormGroup.valid) {
-      const text = this.parkingPlaceLabelFormGroup.value.label;
-      const parkingPlaceGroup = this.canvas.getActiveObject();
-      const labelObject = parkingPlaceGroup._objects[1];
-
-      if (labelObject) {
-        labelObject.set({
-          text: text
-        })
-      } else {
-        const label = this.createLabel(this.parkingPlaceLabelFormGroup.value.label);
-        parkingPlaceGroup.add(label);
-      }
-
-      this.canvas.renderAll();
-      this.parkingPlaceLabelFormGroup.reset();
-    }
-  }
-
-  addBeacon() {
-
-    const beacon = new fabric.Beacon({
-
-    });
-    this.canvas.add(beacon);
-  }
-
-
 
   submit() {
     this.terminal.terminalScheme = JSON.stringify(this.canvas);

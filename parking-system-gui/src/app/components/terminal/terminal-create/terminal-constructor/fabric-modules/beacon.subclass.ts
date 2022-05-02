@@ -1,19 +1,26 @@
 import 'fabric';
-import { TargetLocator } from 'selenium-webdriver';
+import { BeaconStatus } from "../../../../../services/api/parking-system/models/enums/beacon-status.enum";
 
 declare var fabric;
 
 fabric.Beacon = fabric.util.createClass(fabric.Circle, {
   type: 'Beacon',
 
-  initialize: function() {
-    const options = {
+  initialize: function(options) {
+
+    const fill =  BeaconStatus[options.status] == BeaconStatus.DISABLED.toString() ? "red" : "green";
+
+    const overriddenOptions = {
       radius: 10,
-      fill: 'green',
+      fill: fill,
       hasControls: false,
-      hasBorders: false
+      hasBorders: false,
+      top: options.top ?? 0,
+      left: options.left ?? 0,
+      rfid: options.rfid,
+      status: options.status
     };
-    this.callSuper('initialize', options);
+    this.callSuper('initialize', overriddenOptions);
 
     this.on('moving', onMoving);
 
@@ -22,13 +29,16 @@ fabric.Beacon = fabric.util.createClass(fabric.Circle, {
 
   toObject: function() {
     return fabric.util.object.extend(this.callSuper('toObject'), {
-
+      rfid: this.rfid,
+      status: this.status
     });
   }
 })
 
 fabric.Beacon.fromObject = function(object, callback) {
-  return fabric.Object._fromObject('Beacon', object, callback);
+  const beacon = new fabric.Beacon(object);
+
+  return callback(beacon);
 };
 
 

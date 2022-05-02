@@ -1,0 +1,23 @@
+<form [formGroup]="form">
+  <mat-form-field appearance="fill"
+    *ngFor="let control of form.beaconConfigurationControls">
+      <mat-label>{{ control.label }}</mat-label>
+
+      <input *ngIf="control.constructor.name === 'TerminalFormControl'" matInput placeholder="{{control.label}}"
+                      formControlName="{{control.modelProperty}}">
+
+      <mat-select *ngIf="control.constructor.name === 'TerminalSelectFormControl'" formControlName="{{control.modelProperty}}">
+        <mat-option *ngFor="let value of control.values" [value]="value">
+          {{value}}
+        </mat-option>
+      </mat-select>
+
+   </mat-form-field>
+</form>
+<button
+        [disabled]="!form.valid"
+        mat-stroked-button
+        [mat-dialog-close]="form.value">
+        Create
+        <!-- {{ canvas?._activeObject?._objects[1] ? "Update Label" : "Add Label" }} -->
+</button>

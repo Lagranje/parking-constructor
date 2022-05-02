@@ -1,0 +1,15 @@
+<form [formGroup]="form">
+  <mat-form-field appearance="fill"
+    *ngFor="let control of form.parkingPlaceConfigurationControls">
+      <mat-label>{{ control.label }}</mat-label>
+      <input matInput placeholder="{{control.label}}"
+                      formControlName="{{control.modelProperty}}">
+   </mat-form-field>
+</form>
+<button
+        [disabled]="!form.valid"
+        mat-stroked-button
+        [mat-dialog-close]="form.value">
+        Create
+        <!-- {{ canvas?._activeObject?._objects[1] ? "Update Label" : "Add Label" }} -->
+</button>

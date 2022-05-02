@@ -1,4 +1,5 @@
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { BeaconStatus } from "./enums/beacon-status.enum";
 
 export class TerminalFormControl extends FormControl {
 
@@ -9,6 +10,21 @@ export class TerminalFormControl extends FormControl {
     super(value, validator);
     this.label = label;
     this.modelProperty = modelProperty;
+  }
+}
+
+export class TerminalSelectFormControl extends TerminalFormControl {
+  label: string;
+  modelProperty: string;
+  options: any[];
+
+  constructor(label:string, options: any[], modelProperty:string, value:string, validator:any) {
+    super(label, modelProperty, value, validator);
+    this.options = options;
+  }
+
+  get values() {
+    return this.options;
   }
 }
 
@@ -35,6 +51,21 @@ export class ParkingPlaceConfigurationFormGroup extends FormGroup {
   }
 
   get parkingPlaceConfigurationControls(): TerminalFormControl[] {
+    return Object.keys(this.controls).map(c => this.controls[c] as TerminalFormControl);
+  }
+}
+
+export class BeaconConfigurationFormGroup extends FormGroup {
+  constructor() {
+    const statusValues = Object.keys(BeaconStatus).filter((v) => isNaN(Number(v)));
+
+    super({
+      rfid: new TerminalFormControl("RFID", "rfid", "", [Validators.required]),
+      status: new TerminalSelectFormControl("Status", statusValues, "status", "", [Validators.required])
+    })
+  }
+
+  get beaconConfigurationControls(): (TerminalFormControl | TerminalSelectFormControl) [] {
     return Object.keys(this.controls).map(c => this.controls[c] as TerminalFormControl);
   }
 }

@@ -7,23 +7,27 @@ fabric.ParkingPlace = fabric.util.createClass(fabric.Group, {
 
   initialize: function(options) {
 
+    const defaultWidth = 50;
+    const defaultHeight = 50;
+
     const items = [];
 
-    if (options?.objects) {
-      if (options.objects[0])
-        items.push(new fabric.Rect(options.objects[0]));
-      if (options.objects[1])
-        items.push(new fabric.Text(options.objects[1].text, options.objects[1]));
+    options.width = options.width ?? defaultWidth;
+    options.height = options.height ?? defaultHeight;
+
+
+    if (options.objects && options.objects.find(obj => obj.type == 'rect')) {
+      items.push(new fabric.Rect(options.objects.find(obj => obj.type == 'rect')));
     }
     else {
       items.push(new fabric.Rect({
-        width: 50,
-        height: 50,
+        top: 0,
+        left: 0,
+        width: options.width,
+        height: options.height,
         fill: "#808ece"
       }));
     }
-
-
 
     this.callSuper('initialize', items, options);
 
@@ -31,12 +35,20 @@ fabric.ParkingPlace = fabric.util.createClass(fabric.Group, {
 
     this.on('moving', onMoving);
 
+    this.add(new fabric.Text(options.label, {
+      fontSize: 30,
+      originX: 'center',
+      originY: 'center',
+      fill: '#000000'
+    }));
+
   },
 
 
   toObject: function() {
 
     return fabric.util.object.extend(this.callSuper('toObject'), {
+      label: this.label
     });
   }
 })

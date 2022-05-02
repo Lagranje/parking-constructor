@@ -5,23 +5,6 @@
       <button mat-stroked-button (click)="addBeacon()"> Add <fa-icon [icon]="beaconIcon"></fa-icon></button>
     </div>
     <button mat-stroked-button (click)="removeActiveObject()">Remove <fa-icon [icon]="trashIcon"></fa-icon></button>
-    <div class="add-label-form" *ngIf="canvas?._activeObject">
-      <form [formGroup]="parkingPlaceLabelFormGroup">
-        <mat-form-field appearance="fill"
-          *ngFor="let control of parkingPlaceLabelFormGroup.parkingPlaceConfigurationControls">
-            <mat-label>{{ control.label }}</mat-label>
-            <input matInput placeholder="{{control.label}}"
-                            formControlName="{{control.modelProperty}}">
-         </mat-form-field>
-      </form>
-      <button
-              [disabled]="!parkingPlaceLabelFormGroup.valid"
-              mat-stroked-button
-              (click)="addOrUpdateLabel()">
-              Update Label
-              <!-- {{ canvas?._activeObject?._objects[1] ? "Update Label" : "Add Label" }} -->
-      </button>
-    </div>
     <button class="action-submit" mat-stroked-button (click)="submit()">Submit</button>
   </div>
   <canvas class="canvas" id="canvas"></canvas>

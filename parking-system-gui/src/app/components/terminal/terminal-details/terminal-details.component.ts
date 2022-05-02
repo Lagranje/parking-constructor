@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Terminal } from 'src/app/services/api/parking-system/models/terminals.model';
 import { TerminalsService } from 'src/app/services/api/parking-system/services/terminals.service';
 
@@ -14,7 +14,8 @@ export class TerminalDetailsComponent implements OnInit {
   public terminal: Terminal;
 
   constructor(private terminalsService: TerminalsService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -28,7 +29,9 @@ export class TerminalDetailsComponent implements OnInit {
 
   submit() {
     this.terminalsService.patchTerminal(this.terminal)
-                         .subscribe(res => console.log(res));
+                         .subscribe(res =>
+                            this.router.navigate(['./terminals'])
+                         );
   }
 
 

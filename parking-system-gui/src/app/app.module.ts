@@ -20,6 +20,8 @@ import { TerminalCreateComponent } from './components/terminal/terminal-create/t
 import { TerminalConstructorComponent } from './components/terminal/terminal-create/terminal-constructor/terminal-constructor.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
+import { ParkingPlaceDialogComponent } from './components/terminal/terminal-create/terminal-constructor/dialogs/parking-place-dialog.component/parking-place-dialog.component';
+import { BeaconDialogComponent } from './components/terminal/terminal-create/terminal-constructor/dialogs/beacon-dialog.component/beacon-dialog.component';
 
 import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
@@ -31,6 +33,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatSelectModule } from '@angular/material/select';
 
 import "./components/terminal/terminal-create/terminal-constructor/fabric-modules/parking-place.subclass";
 import "./components/terminal/terminal-create/terminal-constructor/fabric-modules/grid.subclass";
@@ -45,6 +48,8 @@ import "./components/terminal/terminal-create/terminal-constructor/fabric-module
     TerminalDetailsComponent,
     TerminalCreateComponent,
     TerminalConstructorComponent,
+    ParkingPlaceDialogComponent,
+    BeaconDialogComponent,
     NavbarComponent,
   ],
   imports: [
@@ -65,6 +70,7 @@ import "./components/terminal/terminal-create/terminal-constructor/fabric-module
     MatStepperModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
