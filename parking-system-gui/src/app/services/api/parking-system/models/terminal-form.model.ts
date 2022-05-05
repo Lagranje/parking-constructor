@@ -46,7 +46,7 @@ export class TerminalConfigurationFormGroup extends FormGroup {
 export class ParkingPlaceConfigurationFormGroup extends FormGroup {
   constructor() {
     super({
-      label: new TerminalFormControl("Label", "label", "", [Validators.required, Validators.minLength(2), Validators.maxLength(2)]),
+      label: new TerminalFormControl("Parking Place UUID", "label", "", [Validators.required, Validators.minLength(2), Validators.maxLength(2)]),
     })
   }
 

@@ -39,6 +39,10 @@ import "./components/terminal/terminal-create/terminal-constructor/fabric-module
 import "./components/terminal/terminal-create/terminal-constructor/fabric-modules/grid.subclass";
 import "./components/terminal/terminal-create/terminal-constructor/fabric-modules/beacon.subclass";
 
+
+import { AuthModule } from '@auth0/auth0-angular';
+import { AuthButtonComponent } from './components/login/auth-button.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +55,7 @@ import "./components/terminal/terminal-create/terminal-constructor/fabric-module
     ParkingPlaceDialogComponent,
     BeaconDialogComponent,
     NavbarComponent,
+    AuthButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +64,10 @@ import "./components/terminal/terminal-create/terminal-constructor/fabric-module
     HttpClientModule,
     ReactiveFormsModule,
     ApiModule.forRoot({rootUrl: environment.api.parkingSystem}),
+    AuthModule.forRoot({
+      domain: environment.auth.domain,
+      clientId: environment.auth.clientId
+    }),
     FontAwesomeModule,
     MatDividerModule,
     MatInputModule,

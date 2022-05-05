@@ -6,6 +6,10 @@ export const environment = {
   production: false,
   api: {
     parkingSystem: 'http://localhost:3000'
+  },
+  auth: {
+    domain: "dev-mcaxjh-z.us.auth0.com",
+    clientId: "axX1mwGMryEje3tBkdiQsVrJeGzCJ4Sp"
   }
 };
 
