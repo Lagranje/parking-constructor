@@ -7,7 +7,8 @@
         {
             "type": "pwa-node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "API",
+            "cwd": "${workspaceFolder}/parking-system-api",
             "skipFiles": [
                 "<node_internals>/**"
             ],

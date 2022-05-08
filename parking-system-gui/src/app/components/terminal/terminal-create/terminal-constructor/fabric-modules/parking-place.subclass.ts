@@ -15,8 +15,8 @@ fabric.ParkingPlace = fabric.util.createClass(fabric.Group, {
     const overriddenOptions = {
       width: options.width ?? defaultWidth,
       height: options.height ?? defaultHeight,
-      top: options.top ?? 0,
-      left: options.left ?? 0,
+      top: options.top ?? 50,
+      left: options.left ?? 50,
       label: options.label
     }
 
@@ -27,12 +27,11 @@ fabric.ParkingPlace = fabric.util.createClass(fabric.Group, {
       items.push(new fabric.Rect({
         top: 0,
         left: 0,
-        width: options.width,
-        height: options.height,
-        fill: "#808ece"
+        fill: "#808ece",
+        width: defaultWidth,
+        height: defaultHeight,
       }));
     }
-
 
     this.callSuper('initialize', items, overriddenOptions);
 
@@ -44,7 +43,7 @@ fabric.ParkingPlace = fabric.util.createClass(fabric.Group, {
       fontSize: 30,
       originX: 'center',
       originY: 'center',
-      fill: '#000000'
+      fill: "#000000",
     }));
 
   },

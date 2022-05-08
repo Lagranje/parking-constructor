@@ -45,4 +45,8 @@ testem.log
 .DS_Store
 Thumbs.db
 
+.env
 
+AUTH0_CLIENT_ID=
+AUTH0_DOMAIN=
+AUTH0_CLIENT_SECRET=

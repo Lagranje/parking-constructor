@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -42,6 +43,7 @@ import "./components/terminal/terminal-create/terminal-constructor/fabric-module
 
 import { AuthModule } from '@auth0/auth0-angular';
 import { AuthButtonComponent } from './components/login/auth-button.component';
+import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 
 @NgModule({
   declarations: [
@@ -65,8 +67,10 @@ import { AuthButtonComponent } from './components/login/auth-button.component';
     ReactiveFormsModule,
     ApiModule.forRoot({rootUrl: environment.api.parkingSystem}),
     AuthModule.forRoot({
-      domain: environment.auth.domain,
-      clientId: environment.auth.clientId
+      ...environment.auth,
+      httpInterceptor: {
+        allowedList: [`${environment.api.parkingSystem}/*`],
+      },
     }),
     FontAwesomeModule,
     MatDividerModule,
@@ -81,7 +85,13 @@ import { AuthButtonComponent } from './components/login/auth-button.component';
     MatDialogModule,
     MatSelectModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHttpInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

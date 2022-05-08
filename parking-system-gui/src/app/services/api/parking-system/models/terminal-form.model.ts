@@ -46,7 +46,7 @@ export class TerminalConfigurationFormGroup extends FormGroup {
 export class ParkingPlaceConfigurationFormGroup extends FormGroup {
   constructor() {
     super({
-      label: new TerminalFormControl("Parking Place UUID", "label", "", [Validators.required, Validators.minLength(2), Validators.maxLength(2)]),
+      label: new TerminalFormControl("Parking Place UUID", "label", "", [Validators.required, Validators.minLength(2), Validators.maxLength(3)]),
     })
   }
 
@@ -60,7 +60,7 @@ export class BeaconConfigurationFormGroup extends FormGroup {
     const statusValues = Object.keys(BeaconStatus).filter((v) => isNaN(Number(v)));
 
     super({
-      rfid: new TerminalFormControl("RFID", "rfid", "", [Validators.required]),
+      udid: new TerminalFormControl("Beacon UUID", "udid", "", [Validators.required]),
       status: new TerminalSelectFormControl("Status", statusValues, "status", "", [Validators.required])
     })
   }
