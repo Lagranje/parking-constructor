@@ -9,7 +9,8 @@ export const environment = {
   },
   auth: {
     domain: "dev-mcaxjh-z.us.auth0.com",
-    clientId: "axX1mwGMryEje3tBkdiQsVrJeGzCJ4Sp"
+    clientId: "axX1mwGMryEje3tBkdiQsVrJeGzCJ4Sp",
+    audience: 'https://dev-mcaxjh-z.us.auth0.com/api/v2/',
   }
 };
 

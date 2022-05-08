@@ -69,8 +69,8 @@ import { AuthHttpInterceptor } from '@auth0/auth0-angular';
     AuthModule.forRoot({
       ...environment.auth,
       httpInterceptor: {
-        allowedList: [`${environment.api.parkingSystem}/*`],
-      },
+        allowedList: [`${environment.api.parkingSystem}/terminals`],
+      }
     }),
     FontAwesomeModule,
     MatDividerModule,
@@ -95,3 +95,6 @@ import { AuthHttpInterceptor } from '@auth0/auth0-angular';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+
